@@ -8,4 +8,5 @@ SOURCES += \
 
 HEADERS += \
     insertionsort.h \
+    mergesort.h \
     sorttesthelper.h

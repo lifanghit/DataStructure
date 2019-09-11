@@ -83,18 +83,42 @@ int main()
     cout << endl;
 
     int n = 10000;
-    int *array = SortTestHelper::generateNearlyOrderedArray(n, 10);
-    int *array2 = SortTestHelper::copyIntArray(array, n);
-    int *array3 = SortTestHelper::copyIntArray(array, n);
+
+    //测试1：一般性测试
+
+    int *array1 = SortTestHelper::generateRandomArray(n, 0, n);
+    int *array2 = SortTestHelper::copyIntArray(array1, n);
+    int *array3 = SortTestHelper::copyIntArray(array1, n);
 
 //    selectionSort(array3, n);
 //    SortTestHelper::printArray(array3, n);
 
-    SortTestHelper::testSort("Selection Sort", selectionSort, array, n);
+    SortTestHelper::testSort("Selection Sort", selectionSort, array1, n);
     SortTestHelper::testSort("Insertion sort", insertionSort, array2, n);
     SortTestHelper::testSort("Bubble sort", bubbleSort, array3, n);
 
-    delete[] array;
+    delete[] array1;
+    delete[] array2;
+    delete[] array3;
+
+    cout << endl;
+
+
+
+    //测试2：测试近乎有序的数组
+    int swaptimes = 10;
+
+    cout << "Test for Random Nearly Ordered Array, size = " << n << ", swap time = " << swaptimes << endl;
+
+    array1 = SortTestHelper::generateNearlyOrderedArray(n, swaptimes);
+    array2 = SortTestHelper::copyIntArray(array1, n);
+    array3 = SortTestHelper::copyIntArray(array1, n);
+
+    SortTestHelper::testSort("Selection Sort", selectionSort, array1, n);
+    SortTestHelper::testSort("Insertion sort", insertionSort, array2, n);
+    SortTestHelper::testSort("Bubble sort", bubbleSort, array3, n);
+
+    delete[] array1;
     delete[] array2;
     delete[] array3;
 

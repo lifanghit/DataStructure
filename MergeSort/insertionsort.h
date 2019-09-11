@@ -2,6 +2,7 @@
 #define INSERTIONSORT_H
 
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
