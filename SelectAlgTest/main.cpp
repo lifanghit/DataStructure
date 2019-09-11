@@ -2,55 +2,11 @@
 #include <string>
 #include "student.h"
 #include "sorttesthelper.h"
+#include "selectionsort.h"
+#include "insertionsort.h"
+#include "bubblesort.h"
 
 using namespace std;
-
-//冒泡排序
-template<typename T>
-void bubbleSort(T arr[], int n) {
-    bool bchange = false;  //交换标志
-    for (int i = 0; i < n; i++) {
-        for (int j = n-1; j > i; j--) {
-            if (arr[j-1] > arr[j]) {
-                swap(arr[j], arr[j-1]);
-                bchange = true;
-            }
-        }
-        // 如果标志为false，说明本轮遍历没有交换，已经是有序数列，可以结束排序
-        if (!bchange)
-            break;
-    }
-}
-
-
-//插入排序
-template <typename T>
-void insertionSort(T arr[], int n) {
-    for (int i = 1 ; i < n ; i++) {
-        //寻找元素arr[i]合适的插入位置
-        T e = arr[i];
-        int j; //j保存元素e应该插入的位置
-        for ( j = i ; j > 0 && arr[j-1] > e ; j--) {
-                arr[j] = arr[j-1];
-        }
-        arr[j] = e;
-    }
-}
-
-
-
-//选择排序
-template<typename T>
-void selectionSort(T arr[], int n) {
-    for (int i = 0; i < n; i++) {
-      int minIndex = i;
-      for (int j = i+1; j < n ; j++) {
-          if(arr[j] < arr[minIndex])
-              minIndex = j;    
-      }
-      swap(arr[i], arr[minIndex]);
-    }
-}
 
 int main()
 {
@@ -89,6 +45,8 @@ int main()
     int *array1 = SortTestHelper::generateRandomArray(n, 0, n);
     int *array2 = SortTestHelper::copyIntArray(array1, n);
     int *array3 = SortTestHelper::copyIntArray(array1, n);
+    int *array4 = SortTestHelper::copyIntArray(array1, n);
+    int *array5 = SortTestHelper::copyIntArray(array1, n);
 
 //    selectionSort(array3, n);
 //    SortTestHelper::printArray(array3, n);
@@ -96,10 +54,14 @@ int main()
     SortTestHelper::testSort("Selection Sort", selectionSort, array1, n);
     SortTestHelper::testSort("Insertion sort", insertionSort, array2, n);
     SortTestHelper::testSort("Bubble sort", bubbleSort, array3, n);
+    SortTestHelper::testSort("Bubble sort 1", bubbleSort1, array4, n);
+    SortTestHelper::testSort("Bubble sort 2", bubbleSort2, array5, n);
 
     delete[] array1;
     delete[] array2;
     delete[] array3;
+    delete[] array4;
+    delete[] array5;
 
     cout << endl;
 
@@ -113,14 +75,46 @@ int main()
     array1 = SortTestHelper::generateNearlyOrderedArray(n, swaptimes);
     array2 = SortTestHelper::copyIntArray(array1, n);
     array3 = SortTestHelper::copyIntArray(array1, n);
+    array4 = SortTestHelper::copyIntArray(array1, n);
+    array5 = SortTestHelper::copyIntArray(array1, n);
 
     SortTestHelper::testSort("Selection Sort", selectionSort, array1, n);
     SortTestHelper::testSort("Insertion sort", insertionSort, array2, n);
     SortTestHelper::testSort("Bubble sort", bubbleSort, array3, n);
+    SortTestHelper::testSort("Bubble sort 1", bubbleSort1, array4, n);
+    SortTestHelper::testSort("Bubble sort 2", bubbleSort2, array5, n);
 
     delete[] array1;
     delete[] array2;
     delete[] array3;
+    delete[] array4;
+    delete[] array5;
+
+
+    //测试3：测试完全有序的数组
+    n = 100000;
+    swaptimes = 0;
+
+    cout << "Test for Ordered Array, size = " << n << ", swap time = " << swaptimes << endl;
+
+    array1 = SortTestHelper::generateNearlyOrderedArray(n, swaptimes);
+    array2 = SortTestHelper::copyIntArray(array1, n);
+    array3 = SortTestHelper::copyIntArray(array1, n);
+    array4 = SortTestHelper::copyIntArray(array1, n);
+    array5 = SortTestHelper::copyIntArray(array1, n);
+
+    // 在这种情况下，不再测试选择排序算法
+//    SortTestHelper::testSort("Selection Sort", selectionSort, array1, n);
+    SortTestHelper::testSort("Insertion sort", insertionSort, array2, n);
+    SortTestHelper::testSort("Bubble sort", bubbleSort, array3, n);
+    SortTestHelper::testSort("Bubble sort 1", bubbleSort1, array4, n);
+    SortTestHelper::testSort("Bubble sort 2", bubbleSort2, array5, n);
+
+    delete[] array1;
+    delete[] array2;
+    delete[] array3;
+    delete[] array4;
+    delete[] array5;
 
     return 0;
 }

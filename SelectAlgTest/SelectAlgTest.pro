@@ -7,5 +7,8 @@ SOURCES += \
         main.cpp
 
 HEADERS += \
+    bubblesort.h \
+    insertionsort.h \
+    selectionsort.h \
     sorttesthelper.h \
     student.h
