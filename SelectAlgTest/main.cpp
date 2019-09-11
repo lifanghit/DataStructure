@@ -5,6 +5,24 @@
 
 using namespace std;
 
+//冒泡排序
+template<typename T>
+void bubbleSort(T arr[], int n) {
+    bool bchange = false;  //交换标志
+    for (int i = 0; i < n; i++) {
+        for (int j = n-1; j > i; j--) {
+            if (arr[j-1] > arr[j]) {
+                swap(arr[j], arr[j-1]);
+                bchange = true;
+            }
+        }
+        // 如果标志为false，说明本轮遍历没有交换，已经是有序数列，可以结束排序
+        if (!bchange)
+            break;
+    }
+}
+
+
 //插入排序
 template <typename T>
 void insertionSort(T arr[], int n) {
@@ -67,15 +85,18 @@ int main()
     int n = 10000;
     int *array = SortTestHelper::generateNearlyOrderedArray(n, 10);
     int *array2 = SortTestHelper::copyIntArray(array, n);
+    int *array3 = SortTestHelper::copyIntArray(array, n);
 
-//    selectionSort(array, n);
-//    SortTestHelper::printArray(array, n);
+//    selectionSort(array3, n);
+//    SortTestHelper::printArray(array3, n);
 
     SortTestHelper::testSort("Selection Sort", selectionSort, array, n);
     SortTestHelper::testSort("Insertion sort", insertionSort, array2, n);
+    SortTestHelper::testSort("Bubble sort", bubbleSort, array3, n);
 
     delete[] array;
     delete[] array2;
+    delete[] array3;
 
     return 0;
 }
