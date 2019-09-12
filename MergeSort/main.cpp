@@ -6,18 +6,9 @@
 
 using namespace std;
 
-//自底向上的归并排序算法
-template<typename T>
-void mergeSortBU(T arr[], int n) {
-    for (int size = 1; size <= n; size += size) {
-        for (int i = 0; i+size < n; i += size + size) {
-            //对arr[i..i+size-1]和arr[i+size...i+2*size-1]进行归并
-            __merge(arr, i, i+size-1, min(i+size+size-1, n-1));
-        }
-    }
-
-}
-
+// 比较Merge Sort和Merge Sort Bottom Up两种排序算法的性能效率
+// 整体而言, 两种算法的效率是差不多的。但是如果进行仔细测试, 自底向上的归并排序会略胜一筹。
+// 更详细的测试, 可以参考课程的这个问题: http://coding.imooc.com/learn/questiondetail/3208.html
 int main()
 {
 
