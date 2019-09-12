@@ -47,7 +47,7 @@ void __mergeSort(T arr[], int l, int r) {
 
     // 优化2: 对于小规模数组, 使用插入排序
     if ((r-l) <= 15) {
-        insertionSort(arr, r, l);
+        insertionSort(arr, l, r);
         return;
     }
     int mid = (l+r)/2;
